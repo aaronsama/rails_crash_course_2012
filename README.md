@@ -1,14 +1,15 @@
-    rails new book_archive
-    tree
+        rails new book_archive
+        tree
 
-* Explanation scaffold
-    rails generate scaffold Book title:string description:text mark:integer
-    tree
+1. Explanation scaffold
 
-* Explanation: migration
+        rails generate scaffold Book title:string description:text mark:integer
+        tree
 
-    rake db:migrate
-    rails server
+2. Explanation: migration
+
+        rake db:migrate
+        rails server
 
 * Explanation: routes
 * Explanation: controller
