@@ -1,14 +1,17 @@
+1. Create an application
         rails new book_archive
         tree
 
-1. Explanation scaffold
+2. Scaffold
 
         rails generate scaffold Book title:string description:text mark:integer
         tree
 
-2. Explanation: migration
+3. Explanation: migration
 
         rake db:migrate
+
+4. Start the server
         rails server
 
 * Explanation: routes
@@ -17,7 +20,8 @@
 
 * Explanation: console
 
-    rails console
+        rails console
+
 
 ------- Hacking the model (add validation):
 # app/model/books.rb
