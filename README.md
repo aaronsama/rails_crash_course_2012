@@ -1,4 +1,5 @@
 1. Create an application
+
         rails new book_archive
         tree
 
@@ -12,6 +13,7 @@
         rake db:migrate
 
 4. Start the server
+
         rails server
 
 * Explanation: routes
