@@ -94,3 +94,9 @@
 
 
 # DEMO 2
+
+        rails new unitn_places
+        rails scaffold user username:string name:string email:string
+        rails scaffold place name:string lat:float lon:float mark:integer
+        rails scaffold comment title:string content:text
+        

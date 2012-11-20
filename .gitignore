@@ -11,3 +11,13 @@
 # Emacs
 \#*
 *~
+
+# Ignore bundler config
+/unitn_places/.bundle
+
+# Ignore the default SQLite database.
+/unitn_places/db/*.sqlite3
+
+# Ignore all logfiles and tempfiles.
+/unitn_places/log/*.log
+/unitn_places/tmp
