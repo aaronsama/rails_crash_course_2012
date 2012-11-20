@@ -1,3 +1,5 @@
+# DEMO 1
+
 1. Create an application
 
         rails new book_archive
@@ -81,13 +83,14 @@
 * Add a select_tag for marks
 
         app/views/books/_form.html.erb
-        <%= f.select :mark, Book.possible_marks %>
+        <%= f.select :mark, Book::MARKS %>
 
 * REFACTORING
 
         app/model/book.rb
-        def self.possible_marks
-          (1..5)
-        end
+        MARKS = (1..5)
 
-        validates :mark, :presence => true, :inclusion => self.possible_marks
+        validates :mark, :presence => true, :inclusion => MARKS
+
+
+# DEMO 2
