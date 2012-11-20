@@ -1,12 +1,12 @@
 # Ignore bundler config
-book_archive/.bundle
+/book_archive/.bundle
 
 # Ignore the default SQLite database.
-book_archive/db/*.sqlite3
+/book_archive/db/*.sqlite3
 
 # Ignore all logfiles and tempfiles.
-book_archive/log/*.log
-book_archive/tmp
+/book_archive/log/*.log
+/book_archive/tmp
 
 # Emacs
 \#*
