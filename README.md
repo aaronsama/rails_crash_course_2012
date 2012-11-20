@@ -96,7 +96,21 @@
 # DEMO 2
 
         rails new unitn_places
-        rails scaffold user username:string name:string email:string
-        rails scaffold place name:string lat:float lon:float mark:integer
-        rails scaffold comment title:string content:text
-        
+        rails g scaffold user username:string name:string email:string
+        rails g scaffold place name:string lat:float lon:float mark:integer
+        rails g scaffold comment title:string content:text
+
+
+* Place has_many comment
+
+        app/models/comment.rb
+        ...
+        belongs_to :place
+
+        app/models/place.rb
+        ...
+        has_many :comments
+
+        db/xxxx_create_comments.rb
+        ...
+        t.integer :place_id
