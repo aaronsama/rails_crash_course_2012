@@ -1,25 +1,28 @@
-> rails new book_archive
-> tree
+    rails new book_archive
+    tree
 
 * Explanation scaffold
-> rails generate scaffold Book title:string description:text mark:integer
-> tree
+
+    rails generate scaffold Book title:string description:text mark:integer
+    tree
 
 * Explanation: migration
-> rake db:migrate
-> rails server
+
+    rake db:migrate
+    rails server
 
 * Explanation: routes
 * Explanation: controller
 * Explanation: model
 
 * Explanation: console
-> rails console
+
+    rails console
 
 ------- Hacking the model (add validation):
 # app/model/books.rb
 ...
-validates :title, :mark, :presence => true
+validates :title, :mark, :presence = true
 validates :mark, :presence => true, :inclusion => 1..5
 
 ------- Hacking the controller (add search):
@@ -52,7 +55,7 @@ end
 
 ------- Hacking the views (add fancy css + rails_helper):
 * set a good root page
-> rm public/index.html
+ rm public/index.html
 # config/routes.rb
 root :to => 'books#index'
 
