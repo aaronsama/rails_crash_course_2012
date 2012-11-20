@@ -1,12 +1,10 @@
 class Book < ActiveRecord::Base
+  MARKS = (1..5)
+
   attr_accessible :description, :mark, :title
   validates :title, :presence => true
+  validates :mark, :presence => true, :inclusion => MARKS
 
-  def self.possible_marks
-    (1..5)
-  end
-
-  validates :mark, :presence => true, :inclusion => self.possible_marks
 
   def self.search(search_term)
     if search_term
