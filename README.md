@@ -2,7 +2,6 @@
     tree
 
 * Explanation scaffold
-
     rails generate scaffold Book title:string description:text mark:integer
     tree
 
