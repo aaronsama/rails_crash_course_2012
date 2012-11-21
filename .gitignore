@@ -11,6 +11,7 @@
 # Emacs
 \#*
 *~
+.#*
 
 # Ignore bundler config
 /unitn_places/.bundle

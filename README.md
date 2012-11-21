@@ -97,7 +97,7 @@
 
         rails new unitn_places
         rails g scaffold user username:string name:string email:string
-        rails g scaffold place name:string lat:float lon:float mark:integer
+        rails g scaffold place name:string latitude:float longitude:float mark:integer
         rails g scaffold comment title:string content:text
 
 
@@ -114,3 +114,27 @@
         db/xxxx_create_comments.rb
         ...
         t.integer :place_id
+
+
+* Many to many between places and users
+
+        app/models/place.rb
+        ...
+        has_and_belongs_to_many :users
+
+        app/models/user.rb
+        ...
+        has_and_belongs_to_many :places
+
+        db/migrate/xxxx_add_many_to_many_between_users_and_places.rb
+
+        def change
+          create_table :places_users, :id => false do |t|
+            t.integer :place_id
+            t.integer :user_id
+
+            t.timestamps
+          end
+        end
+
+        rake db:migrate
