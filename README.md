@@ -138,3 +138,29 @@
         end
 
         rake db:migrate
+
+* adds authentication
+
+        rails g migration adds_data_for_authentication_to user
+
+        ...
+        def up
+          add_column :users, :crypted_password,  :string
+          add_column :users, :password_salt,     :string
+          add_column :users, :persistence_token, :string
+        end
+
+        def down
+          remove_column :users, :crypted_password
+          remove_column :users, :password_salt
+          remove_column :users, :persistence_token
+        end
+
+
+        app/models/user_session.rb
+
+        app/controller/user_sessions_controller.rb
+
+        app/controller/application_controller.rb
+
+        app/controller/users_controller.rb

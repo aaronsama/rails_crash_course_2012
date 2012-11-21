@@ -2,7 +2,7 @@ class PlacesController < ApplicationController
   # GET /places
   # GET /places.json
   def index
-    @places = Place.all
+    @places = Place.search(params[:search_term])
 
     respond_to do |format|
       format.html # index.html.erb
