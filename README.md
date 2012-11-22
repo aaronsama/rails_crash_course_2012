@@ -1,9 +1,120 @@
 # DEMO 1: ict4g_places
 
-        rails new unitn_places
-        rails g scaffold user username:string name:string email:string
-        rails g scaffold place name:string latitude:float longitude:float mark:integer
-        rails g scaffold comment title:string content:text
+1. Create an application
+
+```
+rails new ict4g_places
+```
+
+2. Scaffold
+
+```
+rails generate scaffold Place name:string mark:integer latitude:float longitude:float
+```
+
+3. Explanation: migration
+
+```
+rake db:migrate
+```
+
+4. Start the server
+
+```
+rails server
+```
+
+* Explanation: routes
+* Explanation: controller
+* Explanation: model
+
+* Explanation: console
+
+```
+rails console
+```
+
+## Hacking the model (add validation):
+
+```ruby
+# app/model/place.rb
+# ...
+MARKS = (1..5)
+validates :name, :presence = true
+validates :mark, :presence => true, :inclusion => MARKS
+```
+
+## Hacking the controller (add search):
+
+```ruby
+# app/controller/places_controller.rb
+# ...
+search = params[:search_term]
+  if search
+    @places = Place.where("name LIKE ?", "%#{search}%")
+  else
+    @places = Place.all
+end
+```
+
+* REFACTORING
+
+```ruby
+# app/models/place.rb
+
+def self.search(search_term)
+  if search_term.blank? # nil or ""
+    self.all
+  else
+    self.where("name LIKE ?", "%#{search_term}%")
+  end
+end
+```
+
+```ruby
+# app/views/places/index.html.erb
+# ...
+<%= form_tag places_url, :method => :get do %>
+  <%= text_field_tag :search_term, params[:search_term]  %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+## Hacking the views (add fancy css + rails_helper):
+
+* set a good root page
+
+```
+rm public/index.html
+```
+
+```ruby
+# config/routes.rb
+root :to => 'places#index'
+```
+
+* Add a custom css
+
+  * Explain assets pipeline
+  * Explain how to load custom css
+  * Load fancy css
+
+* Explain: partial
+
+* Form_helper: Add a select_tag for marks
+
+```ruby
+# app/views/books/_form.html.erb
+<%= f.select :mark, Book::MARKS %>
+```
+
+* An alternative: create radio buttons:
+
+```ruby
+<% Place::MARKS.each do |m| %>
+  <%= f.label m.to_s %>
+  <%= f.radio_button :mark, m %>
+<% end %>
+```
 
 * Place has_many comment
 
@@ -74,14 +185,6 @@ t.integer :place_id
         app/controller/application_controller.rb
 
         app/controller/users_controller.rb
-
-
-NB. Radio buttons
-
-    <% Place::MARKS.each do |m| %>
-      <%= f.label m.to_s %>
-      <%= f.radio_button :mark, m %>
-    <% end %>
 
 
 
