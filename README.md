@@ -138,57 +138,6 @@ has_many :comments
 t.integer :place_id
 ```
 
-* Many to many between places and users
-
-        app/models/place.rb
-        ...
-        has_and_belongs_to_many :users
-
-        app/models/user.rb
-        ...
-        has_and_belongs_to_many :places
-
-        db/migrate/xxxx_add_many_to_many_between_users_and_places.rb
-
-        def change
-          create_table :places_users, :id => false do |t|
-            t.integer :place_id
-            t.integer :user_id
-
-            t.timestamps
-          end
-        end
-
-        rake db:migrate
-
-* adds authentication
-
-        rails g migration adds_data_for_authentication_to user
-
-        ...
-        def up
-          add_column :users, :crypted_password,  :string
-          add_column :users, :password_salt,     :string
-          add_column :users, :persistence_token, :string
-        end
-
-        def down
-          remove_column :users, :crypted_password
-          remove_column :users, :password_salt
-          remove_column :users, :persistence_token
-        end
-
-
-        app/models/user_session.rb
-
-        app/controller/user_sessions_controller.rb
-
-        app/controller/application_controller.rb
-
-        app/controller/users_controller.rb
-
-
-
 # DEMO 2: Books (not convered in the course)
 
 1. Create an application
