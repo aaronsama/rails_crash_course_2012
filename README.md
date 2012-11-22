@@ -7,23 +7,24 @@
 
 * Place has_many comment
 
-        app/models/comment.rb
 
 ```ruby
+# app/models/comment.rb
+# ...
 belongs_to :place
 ```
 
-        app/models/place.rb
-        ...
-        ```ruby
-        has_many :comments
-        ```
+```ruby
+# app/models/place.rb
+# ...
+has_many :comments
+```
 
-        db/xxxx_create_comments.rb
-        ...
-        ```ruby
-        t.integer :place_id
-        ```
+```ruby
+# db/xxxx_create_comments.rb
+# ...
+t.integer :place_id
+```
 
 * Many to many between places and users
 
