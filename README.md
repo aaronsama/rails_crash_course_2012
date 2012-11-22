@@ -85,6 +85,12 @@
         app/views/books/_form.html.erb
         <%= f.select :mark, Book::MARKS %>
 
+    <% Place::MARKS.each do |m| %>
+      <%= f.label m.to_s %>
+      <%= f.radio_button :mark, m %>
+    <% end %>
+
+
 * REFACTORING
 
         app/model/book.rb
