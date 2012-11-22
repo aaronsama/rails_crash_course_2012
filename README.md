@@ -97,7 +97,7 @@ root :to => 'places#index'
 
   * Explain assets pipeline
   * Explain how to load custom css
-  * Load fancy css
+  * Load fancy css (see https://gist.github.com/4130176)
 
 * Explain: partial
 
