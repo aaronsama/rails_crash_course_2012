@@ -71,7 +71,7 @@ def self.search(search_term)
 end
 ```
 
-```ruby
+```erb
 # app/views/places/index.html.erb
 # ...
 <%= form_tag places_url, :method => :get do %>
@@ -103,14 +103,14 @@ root :to => 'places#index'
 
 * Form_helper: Add a select_tag for marks
 
-```ruby
+```erb
 # app/views/books/_form.html.erb
 <%= f.select :mark, Book::MARKS %>
 ```
 
 * An alternative: create radio buttons:
 
-```ruby
+```erb
 <% Place::MARKS.each do |m| %>
   <%= f.label m.to_s %>
   <%= f.radio_button :mark, m %>
