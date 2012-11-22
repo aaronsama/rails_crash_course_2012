@@ -9,9 +9,9 @@
 
         app/models/comment.rb
 
-        ```ruby
-        belongs_to :place
-        ```
+```ruby
+belongs_to :place
+```
 
         app/models/place.rb
         ...
