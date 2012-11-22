@@ -78,6 +78,7 @@ end
   <%= text_field_tag :search_term, params[:search_term]  %>
   <%= submit_tag "Search" %>
 <% end %>
+```
 
 ## Hacking the views (add fancy css + rails_helper):
 
