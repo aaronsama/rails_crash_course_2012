@@ -22,3 +22,14 @@
 # Ignore all logfiles and tempfiles.
 /ict4g_places/log/*.log
 /ict4g_places/tmp
+
+# Ignore bundler config
+/ict4g_places_fancy/.bundle
+
+# Ignore the default SQLite database.
+/ict4g_places_fancy/db/*.sqlite3
+
+# Ignore all logfiles and tempfiles.
+/ict4g_places_fancy/log/*.log
+/ict4g_places_fancy/tmp
+
