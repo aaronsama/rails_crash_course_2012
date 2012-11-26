@@ -95,9 +95,26 @@ root :to => 'places#index'
 
 * Add a custom css
 
-  * Explain assets pipeline
-  * Explain how to load custom css
   * Load fancy css (see https://gist.github.com/4130176)
+  * Bootstrap
+
+```ruby
+# Gemfile
+# ...
+gem 'twitter-bootstrap-rails'
+```
+
+```
+rm app/assets/stylesheets/scaffold.css.scss
+# edit application.html
+rails g bootstrap:install
+rails g bootstrap:layout application fixed
+rails g bootstrap:themed places
+```
+
+```css
+body { padding-top: 60px; }
+```
 
 * Explain: partial
 
@@ -119,6 +136,13 @@ root :to => 'places#index'
 
 * Place has_many comment
 
+```
+rails g scaffold comment title:string content:text --without-stylesheets
+```
+
+```
+rails g bootstrap:themed comments
+```
 
 ```ruby
 # app/models/comment.rb
@@ -138,7 +162,7 @@ has_many :comments
 t.integer :place_id
 ```
 
-```ruby
+```erb
 # app/views/places/index.html.erb
 # ...
 <%= link_to "Add a comment", new_comment_url(:place_id => place.id) %>
@@ -191,7 +215,7 @@ attr_accessible :content, :title, :place_id
 ```
 
 
-```erb
+```html+erb
 # app/views/place/show.html.erb
 <hr/>
 <h3>This place has <%= @place.comments.size %> comments</h3>
