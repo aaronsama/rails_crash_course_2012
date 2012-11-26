@@ -138,97 +138,66 @@ has_many :comments
 t.integer :place_id
 ```
 
-# DEMO 2: Books (not convered in the course)
+```ruby
+# app/views/places/index.html.erb
+# ...
+<%= link_to "Add a comment", new_comment_url(:place_id => place.id) %>
+```
 
-1. Create an application
+```ruby
+# app/controller/comments_controller.rb
+# ...
+def new
+  @place = Place.find(params[:place_id])
+  @comment = @place.comments.new
 
-        rails new book_archive
-        tree
+  respond_to do |format|
+    format.html # new.html.erb
+    format.json { render json: @comment }
+  end
+end
 
-2. Scaffold
+#...
+def edit
+  @comment = Comment.find(params[:id])
+  @place = @comment.place
+end
 
-        rails generate scaffold Book title:string description:text mark:integer
-        tree
+#...
+def create
+  @place = Place.find(params[:comment][:place_id])
+  @comment = @place.comments.new(params[:comment])
 
-3. Explanation: migration
-
-        rake db:migrate
-
-4. Start the server
-
-        rails server
-
-* Explanation: routes
-* Explanation: controller
-* Explanation: model
-
-* Explanation: console
-
-        rails console
+  respond_to do |format|
+    if @comment.save
+      format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+      format.json { render json: @comment, status: :created, location: @comment }
+    else
+      format.html { render action: "new" }
+      format.json { render json: @comment.errors, status: :unprocessable_entity }
+    end
+end
+```
 
 
-## Hacking the model (add validation):
+```ruby
+# app/model/comment.rb
+attr_accessible :content, :title, :place_id
+```
 
-        app/model/books.rb
-        ...
-        validates :title, :mark, :presence = true
-        validates :mark, :presence => true, :inclusion => 1..5
+```erb
+# app/views/comments/_form.html.erb
+<%= f.hidden_field :place_id, :value => @place.id %>
+```
 
-## Hacking the controller (add search):
 
-        app/controller/books_controller.rb
-        ...
-        search = params[:search_term]
-        if params[:search_term]
-          @books = Book.where("title LIKE ?", "%#{search}%")
-        else
-          @books = Book.all
-        end
-
-* REFACTORING
-
-        app/models/book.rb
-        def self.search(search_term)
-          if search_term
-            Book.where("title LIKE ?", "%#{search_term}%")
-          else
-            Book.all
-          end
-        end
-
-        app/views/books/index.html.erb
-        ...
-        <%= form_tag books_url, :method => :get do %>
-          <%= text_field_tag :search_term, params[:search_term]  %>
-          <%= submit_tag "Search" %>
-        <% end %>
-
-## Hacking the views (add fancy css + rails_helper):
-
-* set a good root page
-
-        rm public/index.html
-
-        config/routes.rb
-        root :to => 'books#index'
-
-* Add a custom css
-
-  * Explain assets pipeline
-  * Explain how to load custom css
-  * Load fancy css
-
-* Explain: partial
-
-* Add a select_tag for marks
-
-        app/views/books/_form.html.erb
-        <%= f.select :mark, Book::MARKS %>
-
-* REFACTORING
-
-        app/model/book.rb
-        MARKS = (1..5)
-
-        validates :mark, :presence => true, :inclusion => MARKS
+```erb
+# app/views/place/show.html.erb
+<hr/>
+<h3>This place has <%= @place.comments.size %> comments</h3>
+<% @place.comments.each do |comment| %>
+  <b><%= comment.title %></b>
+  <%= comment.content %>
+  <hr/>
+<% end %>
 
