@@ -95,8 +95,8 @@ root :to => 'places#index'
 
 * Add a custom css
 
-  * Load fancy css (see https://gist.github.com/4130176)
-  * Bootstrap
+  * Load fancy css (see https://gist.github.com/4130176) or...
+  * Twitter Bootstrap
 
 ```ruby
 # Gemfile
@@ -137,11 +137,11 @@ body { padding-top: 60px; }
 * Place has_many comment
 
 ```
-rails g scaffold comment title:string content:text --without-stylesheets
+rails g scaffold comment title:string content:text
 ```
 
 ```
-rails g bootstrap:themed comments
+rm app/assets/stylesheets/scaffold.css.scss
 ```
 
 ```ruby
@@ -160,6 +160,14 @@ has_many :comments
 # db/xxxx_create_comments.rb
 # ...
 t.integer :place_id
+```
+
+```
+rake db:migrate
+```
+
+```
+rails g bootstrap:themed comments
 ```
 
 ```erb
